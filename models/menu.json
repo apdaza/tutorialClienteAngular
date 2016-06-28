@@ -3,46 +3,46 @@
         "opciones": [
             {
                 "id": "1",
-                "text": "Principal",
+                "text": "Dominios",
                 "url": "#",
                 "subopciones": [
                   {
-                    "text": "Acerca de",
-                    "url": "#/about"
+                    "text": "Listar",
+                    "url": "#/listarDominios"
                   },
                   {
-                    "text": "Contacto",
-                    "url": "#/main"
+                    "text": "Agregar",
+                    "url": "#/agregarDominio"
                   }
                 ]
             },
             {
               "id": "2",
-              "text": "Usuarios",
+              "text": "Reglas",
                 "url": "#",
                 "subopciones": [
                   {
                     "text": "Listar",
-                    "url": "#/users"
+                    "url": "#/listarReglas"
                   },
                   {
                     "text": "Agregar",
-                    "url": "#"
+                    "url": "#/agregarRegla"
                   }
                 ]
             },
             {
               "id": "3",
-              "text": "opcion 3",
+              "text": "Componentes",
                 "url": "#",
                 "subopciones": [
                   {
-                    "text": "opcion 3.1",
-                    "url": "#"
+                    "text": "Listar",
+                    "url": "#/listarComponentes"
                   },
                   {
-                    "text": "opcion 3.2",
-                    "url": "#"
+                    "text": "Agregar",
+                    "url": "#/agregarComponente"
                   }
                 ]
             }
