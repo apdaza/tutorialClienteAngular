@@ -48,6 +48,10 @@ section {
     margin:2em;
     padding:1em;
 }
+label {
+  width: 50px;
+  text-align: right;
+}
 .body_rojo{
     margin-top: 0px;
     margin-left: 0px;

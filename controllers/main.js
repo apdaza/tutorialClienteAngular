@@ -1,37 +1,21 @@
 // Creación del módulo
-var rulesApp = angular.module('rulesApp', ['ngRoute']);
+var tutorialApp = angular.module('tutorialApp', ['ngRoute']);
 
 // Configuración de las rutas
-rulesApp.config(function($routeProvider) {
+tutorialApp.config(function($routeProvider) {
 
     $routeProvider
         .when('/home', {
             templateUrl : 'views/home.html',
             controller  : 'homeController'
         })
-        .when('/listarDominios', {
-            templateUrl : 'views/listarDominios.html',
-            controller  : 'domainController'
+        .when('/listarContactos', {
+            templateUrl : 'views/listarContactos.html',
+            controller  : 'contactosController'
         })
-        .when('/agregarDominio', {
-            templateUrl : 'views/agregarDominio.html',
-            controller  : 'addDomainController'
-        })
-        .when('/listarReglas', {
-            templateUrl : 'views/listarReglas.html',
-            controller  : 'ruleController'
-        })
-        .when('/agregarRegla', {
-            templateUrl : 'views/agregarRegla.html',
-            controller  : 'addRuleController'
-        })
-        .when('/listarComponentes', {
-            templateUrl : 'views/listarComponentes.html',
-            controller  : 'componentController'
-        })
-        .when('/agregarComponente', {
-            templateUrl : 'views/agregarComponente.html',
-            controller  : 'addComponentController'
+        .when('/agregarContacto', {
+            templateUrl : 'views/agregarContacto.html',
+            controller  : 'addContactoController'
         })
         .when('/about', {
             templateUrl : 'views/about.html',
@@ -42,57 +26,60 @@ rulesApp.config(function($routeProvider) {
         });
 });
 
-rulesApp.controller('homeController', function($scope) {
+tutorialApp.controller('homeController', function($scope) {
+  $scope.title = 'Contactos';
   $scope.message = 'Versión 0.0.1';
 });
 
-rulesApp.controller('domainController', function($scope, $http) {
-  $scope.title = 'Dominios';
-  $scope.message = 'Listado de Dominios de Aplicación';
+tutorialApp.controller('contactosController', function($scope, $http) {
+  $scope.title = 'Contactos';
+  $scope.message = 'Listado de Contactos';
 
-  $http.get('http://localhost:8080/api/rules/domains')
+  $http.get('http://localhost:8080/api/contactos/contactos')
   .then(function(response) {
       $scope.data = response.data;
   });
 });
-rulesApp.controller('addDomainController', function($scope) {
-  $scope.title = 'Dominios';
-  $scope.message = 'Agregar Dominio de Aplicación';
+
+tutorialApp.controller('addContactoController', function($scope, $http) {
+  $scope.title = 'Contactos';
+  $scope.message = 'Agregar Contacto';
+
+  $scope.reset = function(){
+    $scope.contacto = {};
+  }
+
+  $scope.add = function(){
+    if($scope.contacto.nombre == null){
+      return;
+    }
+    if($scope.contacto.apellido == null){
+      return;
+    }
+    if($scope.contacto.celular == null){
+      return;
+    }
+    if($scope.contacto.mail == null){
+      return;
+    }
+    var data = {
+        nombre: $scope.contacto.nombre,
+        apellido: $scope.contacto.apellido,
+        celular: $scope.contacto.celular,
+        mail: $scope.contacto.mail
+    };
+    $http.post('http://localhost:8080/api/contactos/contactos',data);
+
+    $scope.contacto = {};
+  };
 });
 
-rulesApp.controller('ruleController', function($scope, $http) {
-  $scope.title = 'Reglas';
-  $scope.message = 'Listado de Reglas de Aplicación';
-
-  $http.get('http://localhost:8080/api/rules/rules')
-  .then(function(response) {
-      $scope.data = response.data;
-  });
-});
-rulesApp.controller('addRuleController', function($scope) {
-  $scope.title = 'Reglas';
-  $scope.message = 'Agregar Regla de Aplicación';
-});
-
-rulesApp.controller('componentController', function($scope, $http) {
-  $scope.title = 'Componentes';
-  $scope.message = 'Listado de Componentes de Reglas de Aplicación';
-
-  $http.get('http://localhost:8080/api/rules/components')
-  .then(function(response) {
-      $scope.data = response.data;
-  });
-});
-rulesApp.controller('addComponentController', function($scope) {
-  $scope.title = 'Componentes';
-  $scope.message = 'Agregar Componentes de Reglas de Aplicación';
-});
-
-rulesApp.controller('aboutController', function($scope) {
+tutorialApp.controller('aboutController', function($scope) {
+  $scope.title = 'Contactos';
   $scope.message = 'Esta es la página "Acerca de"';
 });
 
-rulesApp.controller('parserMenu', function($scope, $http) {
+tutorialApp.controller('parserMenu', function($scope, $http) {
   $http.get('models/menu.json')
        .then(function(res){
           $scope.menu = res.data.menu;
